@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {formatPrice} from "../utils";
 
-const RangeInput = ({ label, name, size }) => {
+const RangeInput = ({ label, name, size, defaultValue=null }) => {
   const step = 1000;
   const max = step * 100;
-  const [selectedPrice, setSelectedPrice] = useState(max);
+  const [selectedPrice, setSelectedPrice] = useState(defaultValue || max);
 
   const handleRangeChange = (event) => {
     setSelectedPrice(event.target.value);

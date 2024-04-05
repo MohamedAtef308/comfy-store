@@ -1,13 +1,17 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 import { customFetch } from "../utils";
 import { Filters, ProductsContainer, PaginationContainer } from "../components";
 
-export const loader = async () => {
+export const loader = async ({request}) => {
   try {
-    const response = await customFetch.get("/products");
-    console.log(response.data);
-    return response.data;
+    const params = Object.fromEntries([...new URL(request.url).searchParams.entries()])
+    
+    const response = await customFetch.get("/products",
+    {
+      params:params
+    }
+  );
+    return { data: response.data.data, meta: response.data.meta, params: params};
   } catch (error) {
     console.log(error);
     return null;
