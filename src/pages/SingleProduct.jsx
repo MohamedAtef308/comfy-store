@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useLoaderData, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { formatPrice, customFetch, generateAmount } from "../utils";
+import { addItem } from "../features";
 
 export const loader = async ({ params }) => {
   try {
@@ -13,14 +15,32 @@ export const loader = async ({ params }) => {
 };
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
+  const product = useLoaderData();
   const { image, title, price, description, colors, company } =
-    useLoaderData().attributes;
+    product.attributes;
   const dollarPrice = formatPrice(price);
   const [productColor, setProductColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
 
   const handleAmount = (event) => {
     setAmount(parseInt(event.target.value));
+  };
+
+  const handleAddItem = () => {
+    dispatch(
+      addItem({
+        cartID: product.id + productColor,
+        productID: product.id,
+        image,
+        title,
+        price,
+        colors,
+        company,
+        amount,
+        productColor,
+      })
+    );
   };
 
   return (
@@ -97,9 +117,7 @@ const SingleProduct = () => {
           <div className="mt-10">
             <button
               type="button"
-              onClick={() => {
-                console.log("addition to cart");
-              }}
+              onClick={handleAddItem}
               className="btn btn-secondary btn-md"
             >
               Add to cart

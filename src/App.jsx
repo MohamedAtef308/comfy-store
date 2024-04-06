@@ -1,4 +1,4 @@
-// pages
+// Pages
 import {
   About,
   Cart,
@@ -12,14 +12,16 @@ import {
   Register,
   SingleProduct,
 } from "./pages";
-
-// loaders
-import { landingLoader, singleProductLoader, productsLoader } from "./pages";
-
 import { ErrorElement } from "./components";
 
+// Loaders
+import { landingLoader, singleProductLoader, productsLoader } from "./pages";
+
+
+// Router
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+// Routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -73,7 +75,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
 export default App;
