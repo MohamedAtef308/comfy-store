@@ -59,6 +59,8 @@ const cartSlice = createSlice({
 
     // REMOVE ITEM
     removeItem: (state, { payload }) => {
+      console.log(payload);
+
       const removedItem = state.cartItems.find(
         (item) => item.cartID === payload.cartID
       );
@@ -74,10 +76,12 @@ const cartSlice = createSlice({
 
     // EDIT ITEM
     editItem: (state, { payload }) => {
+
       const i = state.cartItems.findIndex(
         (item) => item.cartID === payload.cartID
       );
-      const amountDiff = state.cartItems[i].amount - payload.amount;
+      const amountDiff = payload.amount - state.cartItems[i].amount;
+      console.log(amountDiff);
       state.numItemsInCart += amountDiff;
       state.cartTotal += amountDiff * state.cartItems[i].price;
       state.cartItems[i].amount = payload.amount;
