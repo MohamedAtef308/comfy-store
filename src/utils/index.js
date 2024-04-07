@@ -16,3 +16,12 @@ export const generateAmount = (length) => {
     return i + 1;
   });
 };
+
+export const runLocalStorage = (func) => {
+  if (typeof Storage !== "undefined") {
+    return func();
+  } else {
+    console.log("Local storage isn't available");
+    return null;
+  }
+};

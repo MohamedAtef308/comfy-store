@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { runLocalStorage } from "../../utils";
 
 // INITIAL STATE
 const defaultState = {
@@ -13,20 +14,16 @@ const defaultState = {
 
 //UTILITY
 const getCartFromStorage = () => {
-  if (typeof Storage === "undefined") {
-    console.log("can't access local storage");
-  } else {
+  return runLocalStorage(() => {
     return JSON.parse(localStorage.getItem("cart")) || defaultState;
-  }
+  });
 };
 
 // UTILITY
 const storeCartToStorage = (state) => {
-  if (typeof Storage === "undefined") {
-    console.log("can't access local storage");
-  } else {
+  runLocalStorage(() => {
     localStorage.setItem("cart", JSON.stringify(state));
-  }
+  });
 };
 
 // CART SLICE
@@ -59,7 +56,6 @@ const cartSlice = createSlice({
 
     // REMOVE ITEM
     removeItem: (state, { payload }) => {
-
       const removedItem = state.cartItems.find(
         (item) => item.cartID === payload.cartID
       );
@@ -75,12 +71,10 @@ const cartSlice = createSlice({
 
     // EDIT ITEM
     editItem: (state, { payload }) => {
-
       const i = state.cartItems.findIndex(
         (item) => item.cartID === payload.cartID
       );
       const amountDiff = payload.amount - state.cartItems[i].amount;
-      console.log(amountDiff);
       state.numItemsInCart += amountDiff;
       state.cartTotal += amountDiff * state.cartItems[i].price;
       state.cartItems[i].amount = payload.amount;

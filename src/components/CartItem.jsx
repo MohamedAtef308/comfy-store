@@ -57,7 +57,7 @@ const CartItem = ({
             value={amount}
           >
             {generateAmount(amount + 5).map((i) => (
-              <option value={i}>{i}</option>
+              <option key={i} value={i}>{i}</option>
             ))}
           </select>
         </div>
