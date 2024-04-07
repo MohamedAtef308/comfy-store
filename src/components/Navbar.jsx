@@ -2,35 +2,16 @@ import React, { useEffect, useState } from "react";
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import NavLinks from "./NavLinks";
+import { toggleTheme } from "../features";
 
-const getThemeFromLocalStorage = () => {
-  if (typeof Storage !== "undefined") {
-    return localStorage.getItem("theme") || "winter";
-  } else {
-    console.log("Local storage isn't available");
-  }
-};
+
 
 const Navbar = () => {
-  const {numItemsInCart} = useSelector( (store) => (store.cart));
-  const [theme, setTheme] = useState(getThemeFromLocalStorage());
-
-  const handleTheme = () => {
-    if (theme === "winter") setTheme("night");
-    else setTheme("winter");
-
-    if (typeof Storage !== "undefined") {
-      localStorage.setItem("theme", theme);
-    } else {
-      console.log("Local storage isn't available");
-    }
-  };
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+  const { numItemsInCart } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
+  const handleTheme = () => { dispatch(toggleTheme())}
 
   return (
     <nav className="bg-base-200">

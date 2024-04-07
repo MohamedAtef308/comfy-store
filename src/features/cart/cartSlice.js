@@ -59,7 +59,6 @@ const cartSlice = createSlice({
 
     // REMOVE ITEM
     removeItem: (state, { payload }) => {
-      console.log(payload);
 
       const removedItem = state.cartItems.find(
         (item) => item.cartID === payload.cartID
