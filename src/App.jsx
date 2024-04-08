@@ -14,8 +14,8 @@ import {
 } from "./pages";
 import { ErrorElement } from "./components";
 
-// Loaders
-import { landingLoader, singleProductLoader, productsLoader } from "./pages";
+// Loaders & Actions
+import { landingLoader, singleProductLoader, productsLoader, registerAction } from "./pages";
 
 
 // Router
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
-        loader: productsLoader
+        loader: productsLoader,
       },
       {
         path: "products/:id",
@@ -71,6 +71,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
     errorElement: <Error />,
+    action: registerAction,
   },
 ]);
 

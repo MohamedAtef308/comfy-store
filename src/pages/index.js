@@ -20,6 +20,7 @@ export { loader as productsLoader } from "./Products";
 
 // register
 export { default as Register } from "./Register";
+export {action as registerAction} from "./Register";
 
 // single product
 export { default as SingleProduct } from "./SingleProduct";
