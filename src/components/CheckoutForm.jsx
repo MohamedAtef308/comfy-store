@@ -31,6 +31,7 @@ export const action = (store) => {
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.error?.message || "Error Happened!");
+      if (error?.response?.status === 401 || 403) return redirect("/login");
       return null;
     }
   };
