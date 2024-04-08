@@ -15,11 +15,14 @@ import {
 import { ErrorElement } from "./components";
 
 // Loaders & Actions
-import { landingLoader, singleProductLoader, productsLoader, registerAction } from "./pages";
+import { landingLoader, singleProductLoader, productsLoader, registerAction, loginAction } from "./pages";
 
 
 // Router
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+// Store
+import {store} from "./features/store";
 
 // Routes
 const router = createBrowserRouter([
@@ -66,6 +69,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     errorElement: <Error />,
+    action: loginAction(store),
   },
   {
     path: "/register",

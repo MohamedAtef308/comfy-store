@@ -10,6 +10,7 @@ export { loader as landingLoader} from "./Landing";
 
 // login
 export { default as Login } from "./Login";
+export {action as loginAction} from "./Login";
 
 // orders
 export { default as Orders } from "./Orders";
