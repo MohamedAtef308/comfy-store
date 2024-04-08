@@ -1,6 +1,5 @@
 export { default as About } from "./About";
 export { default as Cart } from "./Cart";
-export { default as Checkout } from "./Checkout";
 export { default as Error } from "./Error";
 export { default as HomeLayout } from "./HomeLayout";
 
@@ -26,3 +25,7 @@ export {action as registerAction} from "./Register";
 // single product
 export { default as SingleProduct } from "./SingleProduct";
 export { loader as singleProductLoader } from "./SingleProduct";
+
+// checkout
+export { default as Checkout } from "./Checkout";
+export { loader as checkoutLoader } from "./Checkout";

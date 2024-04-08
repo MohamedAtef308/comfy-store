@@ -2,7 +2,7 @@ import React from "react";
 import { CartItemsList, CartTotals } from "../components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import SectionTitle from "../components/SectionTitle";
+import {SectionTitle} from "../components";
 
 const Cart = () => {
   const {user} = useSelector((store) => store.user);

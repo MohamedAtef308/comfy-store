@@ -1,9 +1,37 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
+import { CheckoutForm, SectionTitle, CartTotals } from "../components";
+import { redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
+// LOADER
+export const loader = (store) => {
+  return () => {
+    const { user } = store.getState().user;
+    if (!user) {
+      toast.warn("You must be logged in to checkout");
+      return redirect("/login");
+    }
+    return null;
+  };
+};
+
+// COMPONENT
 const Checkout = () => {
-  return (
-    <div>Checkout</div>
-  )
-}
+  const { cartTotal } = useSelector((store) => store.cart);
+  if (cartTotal <= 0) {
+    return <SectionTitle text="Your cart is empty" />;
+  }
 
-export default Checkout
+  return (
+    <>
+      <SectionTitle text="Place your order" />
+      <div className="mt-8 grid gap-8 md:grid-cols-2 item-start">
+        <CheckoutForm />
+        <CartTotals />
+      </div>
+    </>
+  );
+};
+
+export default Checkout;

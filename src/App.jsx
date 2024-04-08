@@ -15,7 +15,8 @@ import {
 import { ErrorElement } from "./components";
 
 // Loaders & Actions
-import { landingLoader, singleProductLoader, productsLoader, registerAction, loginAction } from "./pages";
+import { landingLoader, singleProductLoader, productsLoader, registerAction, loginAction, checkoutLoader } from "./pages";
+import { checkoutAction } from "./components";
 
 
 // Router
@@ -58,6 +59,8 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <Checkout />,
+        loader: checkoutLoader(store),
+        action: checkoutAction(store),
       },
       {
         path: "orders",
