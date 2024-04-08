@@ -49,9 +49,9 @@ const cartSlice = createSlice({
     },
 
     // CLEAR CART
-    clearCart: (state) => {
-      state = defaultState;
-      storeCartToStorage(state);
+    clearCart: () => {
+      storeCartToStorage(defaultState);
+      return defaultState;
     },
 
     // REMOVE ITEM

@@ -27,10 +27,10 @@ const userSlice = createSlice({
       runLocalStorage(() => {
         localStorage.removeItem("user");
       });
+      state.user = null;
       toast.success("Logged out successfully");
     },
     toggleTheme: (state) => {
-
       state.theme = state.theme === "winter" ? "night" : "winter";
 
       runLocalStorage(() => {
