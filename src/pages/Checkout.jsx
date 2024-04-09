@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { CheckoutForm, SectionTitle, CartTotals } from "../components";
+import { clearCart } from "../features";
+import { customFetch, formatPrice } from "../utils";
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -13,6 +15,41 @@ export const loader = (store) => {
       return redirect("/login");
     }
     return null;
+  };
+};
+
+// ACTION
+export const action = (store, queryClient) => {
+  return async ({ request }) => {
+    const { name, address } = Object.fromEntries(await request.formData());
+    const { user } = store.getState().user;
+    const { cartItems, orderTotal, numItemsInCart } = store.getState().cart;
+    const info = {
+      data: {
+        address: address || "Egypt",
+        cartItems,
+        chargeTotal: orderTotal,
+        name: name || "Mohamed",
+        numItemsInCart,
+        orderTotal: formatPrice(orderTotal).toString(),
+      },
+    };
+
+    try {
+      const response = await customFetch.post("/orders", info, {
+        headers: { Authorization: "Bearer " + user.token },
+      });
+      queryClient.removeQueries(["orders"]);
+
+      store.dispatch(clearCart());
+      toast.success("Order placed successfully");
+      return redirect("/orders");
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.error?.message || "Error Happened!");
+      if (error?.response?.status === 401 || 403) return redirect("/login");
+      return null;
+    }
   };
 };
 

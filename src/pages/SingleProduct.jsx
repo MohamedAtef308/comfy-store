@@ -4,10 +4,15 @@ import { useDispatch } from "react-redux";
 import { formatPrice, customFetch, generateAmount } from "../utils";
 import { addItem } from "../features";
 
-export const loader = () => {
+export const loader = (queryClient) => {
   return async ({ params }) => {
     try {
-      const response = await customFetch.get(`/products/${params.id}`);
+      const response = await queryClient.ensureQueryData({
+        queryKey: ["product", params.id],
+        queryFn: async() => (
+          await customFetch.get(`/products/${params.id}`)
+        )
+      })
       return response.data.data;
     } catch (error) {
       console.log(error);

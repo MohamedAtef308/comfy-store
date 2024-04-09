@@ -5,7 +5,10 @@ import { customFetch } from "../utils";
 export const loader = (queryClient) => {
   return async () => {
     try {
-      const response = await customFetch.get("/products?featured=true");
+      const response = await queryClient.ensureQueryData({
+        queryKey: ["featuredProducts"],
+        queryFn: async () => await customFetch.get("/products?featured=true"),
+      });
       return response.data;
     } catch (error) {
       console.log(error);

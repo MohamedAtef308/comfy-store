@@ -23,8 +23,8 @@ import {
   loginAction,
   checkoutLoader,
   ordersLoader,
+  checkoutAction,
 } from "./pages";
-import { checkoutAction } from "./components";
 
 // Router
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -101,12 +101,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
-  )
+  );
   
 }
 

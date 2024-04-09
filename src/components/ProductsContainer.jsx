@@ -6,7 +6,6 @@ import { BsFillGridFill, BsList } from "react-icons/bs";
 
 const ProductsContainer = () => {
   const { meta } = useLoaderData();
-  console.log(meta);
   const [layout, setLayout] = useState("grid");
 
   const setActiveStyles = (targetLayout) => {

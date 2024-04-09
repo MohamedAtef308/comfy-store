@@ -2,7 +2,7 @@ import React from "react";
 import {
   ComplexPaginationContainer,
   OrdersList,
-  PaginationContainer,
+  // PaginationContainer,
   SectionTitle,
 } from "../components";
 import { redirect, useLoaderData } from "react-router-dom";
@@ -23,9 +23,13 @@ export const loader = (store, queryClient) => {
     }
 
     try {
-      const response = await customFetch.get("/orders", {
-        params,
-        headers: { Authorization: "Bearer " + user.token },
+      const response = await queryClient.ensureQueryData({
+        queryKey: ["orders"],
+        queryFn: async () =>
+          await customFetch.get("/orders", {
+            params,
+            headers: { Authorization: "Bearer " + user.token },
+          }),
       });
 
       return { data: response.data.data, meta: response.data.meta };

@@ -30,3 +30,4 @@ export { loader as singleProductLoader } from "./SingleProduct";
 // checkout
 export { default as Checkout } from "./Checkout";
 export { loader as checkoutLoader } from "./Checkout";
+export { action as checkoutAction} from "./Checkout";
