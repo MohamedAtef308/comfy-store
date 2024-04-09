@@ -13,6 +13,7 @@ export {action as loginAction} from "./Login";
 
 // orders
 export { default as Orders } from "./Orders";
+export {loader as ordersLoader} from "./Orders";
 
 // products
 export { default as Products } from "./Products";

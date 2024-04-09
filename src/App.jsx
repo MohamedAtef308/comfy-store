@@ -15,15 +15,22 @@ import {
 import { ErrorElement } from "./components";
 
 // Loaders & Actions
-import { landingLoader, singleProductLoader, productsLoader, registerAction, loginAction, checkoutLoader } from "./pages";
+import {
+  landingLoader,
+  singleProductLoader,
+  productsLoader,
+  registerAction,
+  loginAction,
+  checkoutLoader,
+  ordersLoader,
+} from "./pages";
 import { checkoutAction } from "./components";
-
 
 // Router
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Store
-import {store} from "./features/store";
+import { store } from "./features/store";
 
 // Routes
 const router = createBrowserRouter([
@@ -65,6 +72,7 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+        loader: ordersLoader(store),
       },
     ],
   },
@@ -83,7 +91,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -40,6 +40,7 @@ const PaginationContainer = () => {
         {pages.map((pageNum) => (
           <button
             type="button"
+            key={pageNum}
             onClick={() => {
               handlePageChange(pageNum);
             }}

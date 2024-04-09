@@ -15,3 +15,4 @@ export { default as CartItemsList } from "./CartItemsList";
 export { default as CheckoutForm } from "./CheckoutForm";
 export { action as checkoutAction } from "./CheckoutForm";
 export { default as SectionTitle } from "./SectionTitle";
+export {default as OrdersList} from "./OrdersList";
