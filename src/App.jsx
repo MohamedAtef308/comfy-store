@@ -32,6 +32,17 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Store
 import { store } from "./features/store";
 
+// React Query
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5 // 5 mins
+    }
+  }
+});
+
+
 // Routes
 const router = createBrowserRouter([
   {
@@ -42,18 +53,18 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
-        loader: landingLoader,
+        loader: landingLoader(queryClient),
         errorElement: <ErrorElement />,
       },
       {
         path: "products",
         element: <Products />,
-        loader: productsLoader,
+        loader: productsLoader(queryClient),
       },
       {
         path: "products/:id",
         element: <SingleProduct />,
-        loader: singleProductLoader,
+        loader: singleProductLoader(queryClient),
       },
       {
         path: "cart",
@@ -67,12 +78,12 @@ const router = createBrowserRouter([
         path: "checkout",
         element: <Checkout />,
         loader: checkoutLoader(store),
-        action: checkoutAction(store),
+        action: checkoutAction(store, queryClient),
       },
       {
         path: "orders",
         element: <Orders />,
-        loader: ordersLoader(store),
+        loader: ordersLoader(store, queryClient),
       },
     ],
   },
@@ -91,7 +102,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+    </QueryClientProvider>
+  )
+  
 }
 
 export default App;

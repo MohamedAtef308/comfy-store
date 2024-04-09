@@ -4,14 +4,16 @@ import { useDispatch } from "react-redux";
 import { formatPrice, customFetch, generateAmount } from "../utils";
 import { addItem } from "../features";
 
-export const loader = async ({ params }) => {
-  try {
-    const response = await customFetch.get(`/products/${params.id}`);
-    return response.data.data;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+export const loader = () => {
+  return async ({ params }) => {
+    try {
+      const response = await customFetch.get(`/products/${params.id}`);
+      return response.data.data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
 };
 
 const SingleProduct = () => {

@@ -5,7 +5,7 @@ import { customFetch, formatPrice } from "../utils";
 import { clearCart } from "../features";
 import { toast } from "react-toastify";
 
-export const action = (store) => {
+export const action = (store, queryClient) => {
   return async ({ request }) => {
     const { name, address } = Object.fromEntries(await request.formData());
     const { user } = store.getState().user;

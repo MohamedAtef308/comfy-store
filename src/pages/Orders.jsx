@@ -1,11 +1,16 @@
 import React from "react";
-import { ComplexPaginationContainer, OrdersList, PaginationContainer, SectionTitle } from "../components";
+import {
+  ComplexPaginationContainer,
+  OrdersList,
+  PaginationContainer,
+  SectionTitle,
+} from "../components";
 import { redirect, useLoaderData } from "react-router-dom";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 
 // LOADER
-export const loader = (store) => {
+export const loader = (store, queryClient) => {
   return async ({ request }) => {
     const params = Object.fromEntries([
       ...new URL(request.url).searchParams.entries(),
@@ -36,17 +41,16 @@ export const loader = (store) => {
 
 // COMPONENT
 const Orders = () => {
-  const {meta} = useLoaderData();
+  const { meta } = useLoaderData();
 
-  if (meta.pagination.total < 1)
-    return <SectionTitle text="No orders found"/>
+  if (meta.pagination.total < 1) return <SectionTitle text="No orders found" />;
 
   return (
     <div>
-      <SectionTitle text="Your orders"/>
+      <SectionTitle text="Your orders" />
       <OrdersList />
       {/* <PaginationContainer /> */}
-      <ComplexPaginationContainer/>
+      <ComplexPaginationContainer />
     </div>
   );
 };
